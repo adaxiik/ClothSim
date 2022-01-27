@@ -1,6 +1,6 @@
 #include <raylib.h>
 #include <stdlib.h>
-
+#include "cloth.h"
 int main(void)
 {
 
@@ -9,6 +9,7 @@ int main(void)
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(screenWidth, screenHeight, "raylib o brrr");
+    
     // Define the camera to look into our 3d world
     Camera camera = { 0 };
     camera.position = (Vector3){ 10.0f, 10.0f, 10.0f }; // Camera position
@@ -17,37 +18,31 @@ int main(void)
     camera.fovy = 45.0f;                                // Camera field-of-view Y
     camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 
-    Model model = LoadModel("assets/chicken.obj");                    // Load the animated model mesh and basic data
-    Texture2D texture = LoadTexture("assets/chicken.png");         // Load model texture and set material
-    SetMaterialTexture(&model.materials[0], MATERIAL_MAP_DIFFUSE, texture);     // Set model material map texture
 
     Vector3 position = { 0.0f, 0.0f, 0.0f };            // Set model position
     SetCameraMode(camera, CAMERA_FREE); 
     //SetTargetFPS(60);    
-
+    Cloth cloth = CreateCloth(10,10);
     while (!WindowShouldClose()) 
     {  
         UpdateCamera(&camera);  
         if (IsKeyDown('Z')) camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+        if (IsKeyDown('X')) TakeScreenshot("screenshot.png");
         BeginDrawing();
         {
-            ClearBackground((Color){ 0, 0, 0, 255 });
+            ClearBackground(DARKGRAY);
 
             BeginMode3D(camera);
             {
-                DrawModel(model, position, 1.0f, WHITE);
                 DrawGrid(10, 1.0f);         // Draw a grid
+                DrawCloth(&cloth);
             }
             EndMode3D();
-            DrawText("Raylib ez lol", screenWidth - 200, screenHeight - 20, 10, GRAY);
             DrawFPS(10, 10);
         }
         EndDrawing();
     }
-
-    UnloadTexture(texture);
-    UnloadModel(model);         // Unload model
-
+    DestroyCloth(&cloth);
     CloseWindow();              // Close window and OpenGL context
 
     return 0;
