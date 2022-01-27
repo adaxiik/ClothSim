@@ -8,7 +8,7 @@ int main(void)
     const int screenHeight = 720;
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(screenWidth, screenHeight, "raylib o brrr");
+    InitWindow(screenWidth, screenHeight, "cloth sim go brrr");
     
     // Define the camera to look into our 3d world
     Camera camera = { 0 };
@@ -22,12 +22,16 @@ int main(void)
     Vector3 position = { 0.0f, 0.0f, 0.0f };            // Set model position
     SetCameraMode(camera, CAMERA_FREE); 
     //SetTargetFPS(60);    
-    Cloth cloth = CreateCloth(10,10);
+    Cloth cloth = CreateCloth(50,50);
+    bool paused = true;
     while (!WindowShouldClose()) 
     {  
-        UpdateCamera(&camera);  
+        UpdateCamera(&camera); 
+        if(!paused) 
+            UpdateCloth(&cloth);
         if (IsKeyDown('Z')) camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
         if (IsKeyDown('X')) TakeScreenshot("screenshot.png");
+        if (IsKeyPressed(KEY_SPACE)) paused=!paused;
         BeginDrawing();
         {
             ClearBackground(DARKGRAY);
