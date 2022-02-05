@@ -38,7 +38,7 @@ int main(void)
 
             BeginMode3D(camera);
             {
-                DrawGrid(10, 1.0f);         // Draw a grid
+                DrawGrid(10, 1.0f);
                 DrawCloth(&cloth);
             }
             EndMode3D();
@@ -47,7 +47,7 @@ int main(void)
         EndDrawing();
     }
     DestroyCloth(&cloth);
-    CloseWindow();              // Close window and OpenGL context
+    CloseWindow(); 
 
     return 0;
 }
