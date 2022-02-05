@@ -10,3 +10,4 @@ $ cmake ..
 $ make
 ```
 ## Example
+![Cloth sim gif](example/cloth.gif)

@@ -22,7 +22,9 @@ int main(void)
     Vector3 position = { 0.0f, 0.0f, 0.0f };            // Set model position
     SetCameraMode(camera, CAMERA_FREE); 
     //SetTargetFPS(60);    
+
     Cloth cloth = CreateCloth(30,30);
+    
     bool paused = true;
     while (!WindowShouldClose()) 
     {  
