@@ -7,7 +7,7 @@ int main(void)
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE|FLAG_VSYNC_HINT);
     InitWindow(screenWidth, screenHeight, "cloth sim go brrr");
     
     // Define the camera to look into our 3d world
@@ -22,7 +22,7 @@ int main(void)
     Vector3 position = { 0.0f, 0.0f, 0.0f };            // Set model position
     SetCameraMode(camera, CAMERA_FREE); 
     //SetTargetFPS(60);    
-    Cloth cloth = CreateCloth(50,50);
+    Cloth cloth = CreateCloth(30,30);
     bool paused = true;
     while (!WindowShouldClose()) 
     {  

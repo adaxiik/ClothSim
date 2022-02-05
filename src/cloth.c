@@ -1,9 +1,9 @@
 #include "cloth.h"
 #include <stdio.h>
 #define POINT_SIZE 3.0f
-#define GRAVITY_FORCE (Vector3){0.0f, -9.8f/2, 0.0f}
-#define Vec3FromFloat3(v) (Vector3){ v, v, v }
-#define ITERATIONS 5
+#define GRAVITY_FORCE (Vector3){0.0f, -9.8f, 0.0f}
+
+#define ITERATIONS 20
 
 #define SPRING_COUNT ((cloth->width-1)*cloth->height + (cloth->height-1)*cloth->width)
 #define POINT_COUNT (cloth->width*cloth->height)
@@ -34,6 +34,13 @@ Cloth CreateCloth(int width,int height){
     }
     cloth.points[0].fixed = true;
     cloth.points[width-1].fixed = true;
+    // for (size_t i = 0; i < cloth.width; i++)
+    //     if(i%3 == 0)
+    //         cloth.points[i].fixed = true;
+    
+
+    
+
 
     for (size_t i = 0; i < ((width-1)*height + (height-1)*width); i++)
         cloth.springs[i].length = Vector3Distance(
